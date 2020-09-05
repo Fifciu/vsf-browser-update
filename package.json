@@ -1,0 +1,22 @@
+{
+  "name": "vsf-browser-update",
+  "version": "1.0.0",
+  "description": "Vue Storefront 1 PWA Module for update browser popup",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fifciu/vsf-browser-update.git"
+  },
+  "author": "Filip \"Fifciuu\" Jędrasik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fifciu/vsf-browser-update/issues"
+  },
+  "homepage": "https://github.com/Fifciu/vsf-browser-update#readme",
+  "dependencies": {
+    "browser-update": "^3.3.21"
+  }
+}
