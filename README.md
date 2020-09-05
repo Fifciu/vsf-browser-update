@@ -1,5 +1,8 @@
 # Vue Storefront Browser Update
 PWA Module
+![Preview](https://user-images.githubusercontent.com/30155292/92304237-6eac7300-ef7c-11ea-8ecb-eadc51d90845.png)
+
+It is wrapper for: https://github.com/browser-update/browser-update
 
 ## Requirements
 - Vue Storefront 1.11+
