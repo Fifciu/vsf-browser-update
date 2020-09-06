@@ -57,7 +57,31 @@ As configuration is inside JSON, it does not support these attributes:
 - `onclick`
 - `onclose`
 
+To modify them you have to use module's config inside `src/modules/client.ts`, e.g:
+```ts
+registerModule(BrowserUpdateModule, {
+    onshow (infos) {
+        console.log('Just shown', infos)
+    },
+    onclick (infos) {
+        console.log('Just clicked "Update browser"', infos)
+    },
+    onclose (infos) {
+        console.log('Just clicked "Ignore"', infos)
+    }
+})
+```
+
+For `container`, you should use function which returns DOMElement. I make sure it will be executed only client-side, so you can easily use `window`.
+```ts
+registerModule(BrowserUpdateModule, {
+    container () {
+        return window.document.body;
+    }
+})
+```
+
+*Caution*: configuration inside `client.ts` has bigger power than one inside `local.json` so it is possible to overwrite options. However, keep in mind it is only about `Browser Update` config, you cannot disable module by option in client.ts.
+
 If you want to customize CSS - just use `#buorg` identifier. It is easier to use it because when you use `.buorg` class it will have same power as default ones and default ones will overwrite it. It is also important to do not use `scoped` stylings for that purpose.
 
-## Todo
-- [ ] Add support for all attributes
