@@ -60,10 +60,10 @@ describe('BrowserUpdateModule', () => {
       }
     });
 
-    expect(browserUpdate).toHaveBeenCalledWith(undefined);
+    expect(browserUpdate).toHaveBeenCalledWith({});
   })
 
-  it('calls browserUpdate client side if enabled with proper argument', async () => {
+  it('calls browserUpdate client side if enabled with proper argument from .json config', async () => {
     const configuration = {
       a: 1,
       b: 234,
@@ -81,6 +81,49 @@ describe('BrowserUpdateModule', () => {
     });
 
     expect(browserUpdate).toHaveBeenCalledWith(configuration);
+  })
+
+  it('calls browserUpdate client side if enabled with proper argument from client.ts config', async () => {
+    const moduleConfig = {
+      a: 1,
+      b: 234,
+      c: '213123'
+    };
+
+    await BrowserUpdateModule({
+      ...getMockedModuleOptions(),
+      appConfig: {
+        browserUpdate: {
+          enabled: true
+        }
+      },
+      moduleConfig
+    });
+
+    expect(browserUpdate).toHaveBeenCalledWith(moduleConfig);
+  })
+
+  it('calls container function if provided', async () => {
+    const expectValue = 1234343;
+    const moduleConfig = {
+      container: jest.fn(() => expectValue)
+    };
+
+    await BrowserUpdateModule({
+      ...getMockedModuleOptions(),
+      appConfig: {
+        browserUpdate: {
+          enabled: true
+        }
+      },
+      moduleConfig
+    });
+
+    expect(moduleConfig.container).toHaveBeenCalled();
+    expect(browserUpdate).toHaveBeenCalledWith({
+      ...moduleConfig,
+      container: expectValue
+    });
   })
 
   it('prints console error if browserUpdate throws an error', async () => {
